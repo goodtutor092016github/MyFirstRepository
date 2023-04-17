@@ -18,9 +18,31 @@
         </select>
         <button id="get-link">Get Question</button>
     </div>
-    
+    <div id="link-container"></div>
 
-
-    
+    <script>
+        $(document).ready(function() {
+            $("#get-link").click(function() {
+                var student = $("#student").val();
+                if(student != "") {
+                    $.get("https://goodtutor092016github.github.io/MyFirstRepository/data.csv", function(data) {
+                        var questionLinks = $.csv.toObjects(data);
+                        var link ="";
+                        $.each(questionLinks, function(index, questionLink) {
+                            if(questionLink.StdName == student) {
+                                link = questionLink.QuestionLink;
+                                return false;
+                            }
+                        });
+                        if(link != "") {
+                            $("#link-container").html("<a href='" + link + "?student=" + studnet + "' target='_blank'>Question Link</a>");
+                        } else {
+                            $("#link-container").html("Question link not found for selected student.");
+                        }
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 </html>
