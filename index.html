@@ -12,15 +12,46 @@
         <label for="student">Select Student</label>
         <select id="student">
             <option value="">-- Select --</option>
-            <option value="SA">SA</option>
-            <option value="SB">SB</option>
-            <option value="SC">SC</option>
-            <option value="SD">SD</option>
+            <option value="5C 01">5C 01</option>
+            <option value="5C 02">5C 02</option>
+            <option value="5C 03">5C 03</option>
+            <option value="5C 04">5C 04</option>
+            <option value="5C 05">5C 05</option>
+            <option value="5C 06">5C 06</option>
+            <option value="5C 07">5C 07</option>
+            <option value="5C 08">5C 08</option>
+            <option value="5C 09">5C 09</option>
+            <option value="5C 10">5C 10</option>
+            <option value="5C 11">5C 11</option>
+            <option value="5C 12">5C 12</option>
+            <option value="5C 13">5C 13</option>
+            <option value="5C 14">5C 14</option>
+            <option value="5C 15">5C 15</option>
+            <option value="5C 16">5C 16</option>
+            <option value="5C 17">5C 17</option>
+            <option value="5C 18">5C 18</option>
+            <option value="5C 19">5C 19</option>
+            <option value="5C 20">5C 20</option>
+            <option value="5C 21">5C 21</option>
+            <option value="5C 22">5C 22</option>
+            <option value="5C 23">5C 23</option>
+            <option value="5C 24">5C 24</option>
+            <option value="5C 25">5C 25</option>
+            <option value="5C 26">5C 26</option>
+            <option value="5C 27">5C 27</option>
+            <option value="5C 28">5C 28</option>
+            <option value="5C 29">5C 29</option>
+            <option value="5C 30">5C 30</option>
+            <option value="5C 31">5C 31</option>
+            <option value="5C 32">5C 32</option>
+            <option value="5C 33">5C 33</option>
+
         </select>
         <button id="get-link">Get Question Link</button>
 
     </div>
     <div id="link-container"></div>
+    <div id="link-container_s"></div>
 
     <script>
 		$(document).ready(function() {
@@ -30,16 +61,20 @@
 					$.get("https://goodtutor092016github.github.io/MyFirstRepository/data.csv", function(data) {
 						var questionLinks = $.csv.toObjects(data);
 						var link = "";
+                        var slink = "";
 						$.each(questionLinks, function(index, questionLink) {
 							if (questionLink.StdName == student) {
 								link = questionLink.QuestionLink;
+                                slink = questionLink.SolLink;
 								return false;
 							}
 						});
-						if (link != "") {
+						if (link != "" && slink !="") {
 							$("#link-container").html("<a href='" + link + "?student=" + student + "' target='_blank'>Question Link</a>");
+                            $("#link-container_s").html("<a href='" + slink + "?student=" + student + "' target='_blank'>Solution Link</a>");
 						} else {
 							$("#link-container").html("Question link not found for selected student.");
+                            $("#link-container_s").html("Solution link not found for selected student.");
 						}
 					});
 				}
